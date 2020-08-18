@@ -29,4 +29,12 @@ export const constantRouterMap = [{
       }
     }
   ]
+}, {
+  path: '/login',
+  name: 'Login',
+  component: () => import('@/views/Login'),
+  meta: {
+    title: '登录',
+    keepAlive: false
+  }
 }]

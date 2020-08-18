@@ -110,7 +110,7 @@ module.exports = config
 ```javascript
 // 本地环境配置
 module.exports = {
-  title: 'vue-h5-template',
+  title: 'suxiaoxiao',
   baseUrl: 'http://localhost:9018', // 项目地址
   baseApi: 'https://test.xxx.com/api', // 本地api请求地址
   APPID: 'xxx',
@@ -272,7 +272,7 @@ Vue.use(Tabbar).use(TabbarItem)
 
 #### 目录结构
 
-vue-h5-template 所有全局样式都在 `@/src/assets/css` 目录下设置
+suxiaoxiao 所有全局样式都在 `@/src/assets/css` 目录下设置
 
 ```bash
 ├── assets

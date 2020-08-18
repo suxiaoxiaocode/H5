@@ -1,11 +1,25 @@
 import axios from 'axios'
 import store from '@/store'
-import { Toast } from 'vant'
+import {
+  Toast
+} from 'vant'
 // 根据环境不同引入不同api地址
-import { baseApi } from '@/config'
+import {
+  baseApi
+} from '@/config'
+
+let URL = ''
+switch (process.env.NODE_ENV) {
+  case 'development':
+    URL = '/grheapi' + baseApi
+    break;
+  case 'production':
+    URL = '/grheapi' + baseApi
+    break;
+}
 // create an axios instance
 const service = axios.create({
-  baseURL: baseApi, // url = base api url + request url
+  baseURL: URL, // url = base api url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
@@ -20,8 +34,8 @@ service.interceptors.request.use(
         forbidClick: true
       })
     }
-    if (store.getters.token) {
-      config.headers['X-Token'] = ''
+    if (localStorage.getItem('grhe_token')) {
+      config.headers['grhe_token'] = localStorage.getItem('grhe_token')
     }
     return config
   },
@@ -37,14 +51,33 @@ service.interceptors.response.use(
     Toast.clear()
     const res = response.data
     if (res.status && res.status !== 200) {
-      // 登录超时,重新登录
-      if (res.status === 401) {
-        store.dispatch('FedLogOut').then(() => {
-          location.reload()
-        })
-      }
       return Promise.reject(res || 'error')
     } else {
+      const code = response.data.code
+      switch (code) {
+        case '102':
+          window.localStorage.removeItem('grhe_token')
+          setTimeout(() => {
+            window.location.reload()
+          }, 500);
+          break;
+        case '101':
+          window.localStorage.removeItem('grhe_token')
+          setTimeout(() => {
+            window.location.reload()
+          }, 500);
+          break;
+        case '-1':
+          Toast(res.msg)
+          break;
+        case '100':
+          Toast("系统出错")
+          break;
+        case '103':
+          Toast(res.msg)
+
+          break;
+      }
       return Promise.resolve(res)
     }
   },
