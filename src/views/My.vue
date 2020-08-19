@@ -1,6 +1,9 @@
 <!-- home -->
 <template>
-  <div class="home">个人中心</div>
+  <div class="home">
+    个人中心
+    <img src="@/assets/images/car.jpg" alt />
+  </div>
 </template>
 
 <script>

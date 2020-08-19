@@ -1,6 +1,9 @@
 <!-- home -->
 <template>
-  <div class="home">登录</div>
+  <div class="home">
+    登录
+    <img src="@/assets/images/car.jpg" alt />
+  </div>
 </template>
 
 <script>
