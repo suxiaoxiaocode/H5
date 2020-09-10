@@ -21,6 +21,10 @@ import '@/assets/css/index.scss'
 import 'lib-flexible/flexible.js'
 // filters
 import './filters'
+import LuckDraw from 'vue-luck-draw'
+import lottery from 'vue-lottery'
+Vue.use(lottery)
+Vue.use(LuckDraw)
 //生产模式消息
 Vue.config.productionTip = false
 new Vue({
